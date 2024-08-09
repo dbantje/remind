@@ -58,6 +58,13 @@ $include "./modules/21_tax/on/input/f21_prop_fe_sub.cs4r"
 $offdelim
   /
 ;
+Parameter f21_tau_SE_ecotax(tall,all_regi,all_te,ecotax_scen,ecotax_perspective) "Ecotax for SE technologies"
+  /
+$ondelim
+$include "./modules/21_tax/on/input/f21_tau_SE_ecotax.cs4r"
+$offdelim
+  /
+;
 
 *** transfer data to parameters and rescaling of FE parameters from $/GJ to trillion $ / TWa (subsidies also get adjusted in preloop.gms to avoid neg. prices)
 
@@ -104,6 +111,15 @@ p21_tau_pe2se_inconv(ttot,regi,te)$(ttot.val ge 2005)=0.000000;
 p21_tau_pe2se_tax(ttot,regi,te)$(ttot.val ge 2005)    = p21_tau_pe2se_tax(ttot,regi,te)    * 0.001 / sm_EJ_2_TWa;
 p21_tau_pe2se_sub(ttot,regi,te)$(ttot.val ge 2005)    = p21_tau_pe2se_sub(ttot,regi,te)    * 0.001 / sm_EJ_2_TWa;
 p21_tau_pe2se_inconv(ttot,regi,te)$(ttot.val ge 2005) = p21_tau_pe2se_inconv(ttot,regi,te) * 0.001 / sm_EJ_2_TWa;
+
+***Ecotaxes
+p21_tau_SE_ecotax(tall,all_regi,all_te) = 0;
+
+$IFTHEN.ecotaxes not %cm_ecotax_perspective% == "off"
+  p21_tau_SE_ecotax(ttot,all_regi,all_te)$f21_tau_fe_tax(ttot,all_regi,all_te,%cm_ecotax_scen%,%cm_ecotax_perspective%) = f21_tau_fe_tax(ttot,all_regi,all_te,%cm_ecotax_scen%,%cm_ecotax_perspective%)*0.001/sm_EJ_2_TWa;
+$ENDIF.ecotaxes
+display p21_tau_SE_ecotax;
+
 
 ***cb 20110923 load paths for ressource export taxes
 ***cb* file for resource export taxes, not used in default settings

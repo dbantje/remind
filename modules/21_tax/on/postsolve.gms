@@ -40,6 +40,12 @@ p21_taxrevPE0(ttot,regi,entyPe) = pm_tau_pe_tax(ttot,regi,entyPe) * vm_prodPe.l(
 p21_taxrevCES0(ttot,regi,in) = pm_tau_ces_tax(ttot,regi,in) * vm_cesIO.l(ttot,regi,in);
 p21_taxrevPE2SE0(ttot,regi) = sum(pe2se(enty,enty2,te),
                                     (p21_tau_pe2se_tax(ttot,regi,te) + p21_tau_pe2se_sub(ttot,regi,te) + p21_tau_pe2se_inconv(ttot,regi,te)) * vm_prodSe.l(ttot,regi,enty,enty2,te)
+                                  );
+p21_taxrevEcoSE0(ttot,regi) = sum(pe2se(enty,enty2,te),
+                                    p21_tau_SE_ecotax(ttot,regi,te) * vm_prodSe.l(ttot,regi,enty,enty2,te)
+                                  )
+                              + sum(se2se(enty,enty2,te),
+                                    p21_tau_SE_ecotax(ttot,regi,te) * vm_prodSe.l(ttot,regi,enty,enty2,te)
                                   ); 
 p21_taxrevXport0(ttot,regi) = sum(tradePe(enty), p21_tau_xpres_tax(ttot,regi,enty) * vm_Xport.l(ttot,regi,enty));
 p21_taxrevSO20(ttot,regi) = p21_tau_so2_tax(ttot,regi) * vm_emiTe.l(ttot,regi,"so2");
@@ -72,6 +78,7 @@ p21_taxrevResEx_iter(iteration+1,ttot,regi) = v21_taxrevResEx.l(ttot,regi);
 p21_taxrevPE_iter(iteration+1,ttot,regi,entyPe) = v21_taxrevPE.l(ttot,regi,entyPe);
 p21_taxrevCES_iter(iteration+1,ttot,regi,in) = v21_taxrevCES.l(ttot,regi,in);
 p21_taxrevPE2SE_iter(iteration+1,ttot,regi) = v21_taxrevPE2SE.l(ttot,regi);
+p21_taxrevEcoSE_iter(iteration+1,ttot,regi) = v21_taxrevEcoSE.l(ttot,regi);
 p21_taxrevXport_iter(iteration+1,ttot,regi) = v21_taxrevXport.l(ttot,regi);
 p21_taxrevSO2_iter(iteration+1,ttot,regi) = v21_taxrevSO2.l(ttot,regi);
 p21_taxrevBio_iter(iteration+1,ttot,regi) = v21_taxrevBio.l(ttot,regi);
