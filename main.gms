@@ -1236,11 +1236,11 @@ $setGlobal cm_coal_scen  medCoal        !! def = medCoal  !! regexp = 0|lowCoal|
 $setglobal c_ccsinjecrateRegi  off  !! def = "off"
 *** cm_ecotax_perspective chooses the monetization perspective used to estimate Ecotaxes
 ***   (off)  No ecotaxes
-***   (damage costs)
-***   (prevention costs)
-***   (budget constraint)
-***   (taxation costs)
-***   (low estimate)
+***   (damage_costs)
+***   (prevention_costs)
+***   (budget_constraint)
+***   (taxation_costs)
+***   (low_estimate)
 ***   (median)
 $setglobal cm_ecotax_perspective  off      !! def = off
 *** cm_ecotax_scen sets the underlying REMIND scenario that was used for prospective LCA
