@@ -35,12 +35,12 @@ ecotax_scen           "Scenarios for ecotaxes"
 
 ecotax_perspective          "Monetization perspective for ecotaxes"
 /
-   prevention costs
-   taxation costs
-   budget constraint
-   low estimate
+   prevention_costs
+   taxation_costs
+   budget_constraint
+   low_estimate
    median
-   damage costs
+   damage_costs
 /
 ;
 
