@@ -26,14 +26,14 @@ teSeTax_coeff          "coefficients of logistic function to describe relationss
   "a"
   "b"
 /
-;
+
 
 ecotax_scen           "Scenarios for ecotaxes"
 /
    SSP2-NPi
    SSP2-PkBudg500
 /
-;
+
 
 ecotax_perspective          "Monetization perspective for ecotaxes"
 /
