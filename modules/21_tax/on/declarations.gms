@@ -127,7 +127,7 @@ v21_taxemiMkt(ttot,all_regi,all_emiMkt)         "tax on greenhouse gas emissions
 v21_taxrevImport(ttot,all_regi,all_enty)        "net change vs. last iteration of tax revenues from energy import tax"
 v21_taxrevChProdStartYear(ttot,all_regi)        "tax to limit changes compared to reference run in cm_startyear"
 v21_taxrevSE(ttot,all_regi)                     "tax on SE electricity demand, used for taxes on electrolysis"
-v21_taxrevEcoSE(ttoat,all_regi)                 "ecotax on SE"
+v21_taxrevEcoSE(ttot,all_regi)                 "ecotax on SE"
 ;
 
 Positive Variable
