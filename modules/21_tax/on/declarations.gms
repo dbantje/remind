@@ -20,7 +20,7 @@ pm_tau_ces_tax(ttot,all_regi,all_in)                  "ces production tax to imp
 p21_tau_SE_tax(ttot,all_regi,all_te)                  "maximum tax rate for SE electricity tax, used for taxes on electrolysis"
 p21_tau_fe_tax(ttot,all_regi,emi_sectors,all_enty)    "tax path for final energy"
 p21_tau_fe_sub(ttot,all_regi,emi_sectors,all_enty)    "subsidy path for final energy"
-p21_tau_SE_ecotax(tall,all_regi,all_te)               "tax path for SE ecotax [trillion $/TWa]"
+p21_tau_SE_ecotax(ttot,all_regi,all_te)               "tax path for SE ecotax [trillion $/TWa]"
 
 pm_taxrevGHG0(ttot,all_regi)                                 "reference level value of GHG emission tax"
 pm_taxrevCO2Sector0(ttot,all_regi,emi_sectors)               "reference level value of CO2 sector markup tax"
