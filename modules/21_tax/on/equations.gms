@@ -195,7 +195,7 @@ v21_taxrevPE2SE(t,regi)
 *'  Documentation of overall tax approach is above at q21_taxrev.
 ***---------------------------------------------------------------------------
 q21_taxrevEcoSE(t,regi)$(t.val ge max(2010,cm_startyear))..
-v21_taxrevEq21_taxrevEcoSE(t,regi) 
+v21_taxrevEcoSE(t,regi) 
 =e= SUM(pe2se(enty,enty2,te),
           (p21_tau_SE_ecotax(t,regi,te)) * vm_prodSe(t,regi,enty,enty2,te)
        )
