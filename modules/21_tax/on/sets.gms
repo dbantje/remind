@@ -40,7 +40,6 @@ ecotax_perspective          "Monetization perspective for ecotaxes"
    prevention costs
    taxation costs
    budget constraint
-   off
    low estimate
    median
    damage costs
