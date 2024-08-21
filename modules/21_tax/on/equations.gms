@@ -46,6 +46,7 @@ q21_taxrev(t,regi)$(t.val ge max(2010,cm_startyear))..
   + v21_taxrevXport(t,regi)
   + v21_taxrevSO2(t,regi)
   + v21_taxrevBio(t,regi)
+  + v21_taxrevEcoSE(t,regi)
   - vm_costSubsidizeLearning(t,regi)
   + v21_implicitDiscRate(t,regi)
   + sum(emiMkt, v21_taxemiMkt(t,regi,emiMkt))  
@@ -190,6 +191,20 @@ v21_taxrevPE2SE(t,regi)
           (p21_tau_pe2se_tax(t,regi,te) + p21_tau_pe2se_sub(t,regi,te) + p21_tau_pe2se_inconv(t,regi,te)) * vm_prodSe(t,regi,enty,enty2,te)
        )
     - p21_taxrevPE2SE0(t,regi);
+
+***---------------------------------------------------------------------------
+*'  Calculation of SE ecotaxes (Primary to secondary energy technology taxes, specified by technology): effective tax rate (tax - subsidy) times SE output of technology 
+*'  Documentation of overall tax approach is above at q21_taxrev.
+***---------------------------------------------------------------------------
+q21_taxrevEcoSE(t,regi)$(t.val ge max(2010,cm_startyear))..
+v21_taxrevEcoSE(t,regi) 
+=e= SUM(pe2se(enty,enty2,te),
+          (p21_tau_SE_ecotax(t,regi,te)) * vm_prodSe(t,regi,enty,enty2,te)
+       )
+    + SUM(se2se(enty,enty2,te),
+          (p21_tau_SE_ecotax(t,regi,te)) * vm_prodSe(t,regi,enty,enty2,te)
+       )
+    - p21_taxrevEcoSE0(t,regi);
 
 ***---------------------------------------------------------------------------
 *'  Calculation of export taxes: tax rate times export volume

@@ -20,6 +20,7 @@ pm_tau_ces_tax(ttot,all_regi,all_in)                  "ces production tax to imp
 p21_tau_SE_tax(ttot,all_regi,all_te)                  "maximum tax rate for SE electricity tax, used for taxes on electrolysis"
 p21_tau_fe_tax(ttot,all_regi,emi_sectors,all_enty)    "tax path for final energy"
 p21_tau_fe_sub(ttot,all_regi,emi_sectors,all_enty)    "subsidy path for final energy"
+p21_tau_SE_ecotax(ttot,all_regi,all_te)               "tax path for SE ecotax [trillion $/TWa]"
 
 pm_taxrevGHG0(ttot,all_regi)                                 "reference level value of GHG emission tax"
 pm_taxrevCO2Sector0(ttot,all_regi,emi_sectors)               "reference level value of CO2 sector markup tax"
@@ -41,6 +42,7 @@ p21_taxrevFlex0(ttot,all_regi)                               "reference level va
 p21_taxrevImport0(ttot,all_regi,all_enty,tax_import_type_21) "tax revenues from import tax in the previous iteration"
 p21_taxrevChProdStartYear0(ttot,all_regi)                    "reference level value of tax to limit changes compared to reference run in cm_startyear"
 p21_taxrevSE0(ttot,all_regi)                                 "reference level value of tax on SE electricity demand"
+p21_taxrevEcoSE0(ttot,all_regi)                               "reference level value of SE ecotax"
 
 p21_taxrevGHG_iter(iteration,ttot,all_regi)                "reference level value of GHG emission tax revenue"
 p21_taxrevCCS_iter(iteration,ttot,all_regi)                "reference level value of CCS tax revenue"
@@ -58,6 +60,7 @@ p21_taxrevFlex_iter(iteration,ttot,all_regi)               "reference level valu
 p21_taxrevImport_iter(iteration,ttot,all_regi,all_enty)    "reference level value of import tax"
 p21_taxrevChProdStartYear_iter(iteration,ttot,all_regi)    "Difference to tax revenues in last iteration for: tax to limit changes compared to reference run in cm_startyear"
 p21_taxrevSE_iter(iteration,ttot,all_regi)                 "Difference to tax revenues in last iteration for: tax on SE electricity demand"
+p21_taxrevEcoSE_iter(iteration,ttot,all_regi)              "reference level value of SE ecotax"
 
 p21_CO2TaxSectorMarkup(ttot,all_regi,emi_sectors)          "CO2 tax markup in building, industry or transport sector"
 
@@ -126,6 +129,7 @@ v21_taxemiMkt(ttot,all_regi,all_emiMkt)         "tax on greenhouse gas emissions
 v21_taxrevImport(ttot,all_regi,all_enty)        "net change vs. last iteration of tax revenues from energy import tax"
 v21_taxrevChProdStartYear(ttot,all_regi)        "tax to limit changes compared to reference run in cm_startyear"
 v21_taxrevSE(ttot,all_regi)                     "tax on SE electricity demand, used for taxes on electrolysis"
+v21_taxrevEcoSE(ttot,all_regi)                 "ecotax on SE"
 ;
 
 Positive Variable
@@ -158,6 +162,7 @@ q21_taxrevImport(ttot,all_regi,all_enty)        "calculation of import tax"
 q21_taxrevChProdStartYear(ttot,all_regi)        "calculation of tax to limit changes compared to reference run in cm_startyear"
 q21_taxrevSE(ttot,all_regi)                     "calculation of tax on SE electricity demand, used for taxes on electrolysis"
 q21_SeTaxRate(ttot,all_regi,all_te)             "calculation of SE tax rate, used for taxes on electrolysis"
+q21_taxrevEcoSE(ttot,all_regi)                  "calculation of ecotax on SE"
 ;
 
 $ifthen.importtaxrc "%cm_taxrc_RE%" == "REdirect"

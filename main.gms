@@ -1271,6 +1271,19 @@ $setGlobal cm_coal_scen  medCoal        !! def = medCoal  !! regexp = 0|lowCoal|
 *' *  ("GLO 0.005") reproduces c_ccsinjecratescen = 1
 *' *  ("GLO 0.00125, CAZ_regi 0.0045, CHA_regi 0.004, EUR_regi 0.0045, IND_regi 0.004, JPN_regi 0.002, USA_regi 0.002") "example that is taylored such that NDC goals are achieved without excessive CCS in a delayed transition scenario. Globally, 75% reduction, 10% reduction in CAZ etc. compared to reference case with c_ccsinjecratescen = 1"
 $setglobal c_ccsinjecrateRegi  off  !! def = "off"
+*** cm_ecotax_perspective chooses the monetization perspective used to estimate Ecotaxes
+***   (off)  No ecotaxes
+***   (damage_costs)
+***   (prevention_costs)
+***   (budget_constraint)
+***   (taxation_costs)
+***   (low_estimate)
+***   (median)
+$setglobal cm_ecotax_perspective  off      !! def = off
+*** cm_ecotax_scen sets the underlying REMIND scenario that was used for prospective LCA
+***   (SSP2-NPi)
+***   (SSP2-PkBudg500)
+$setglobal cm_ecotax_scen  SSP2-NPi      !! def = SSP2-NPi
 *** c_SSP_forcing_adjust "chooses forcing target and budget according to SSP scenario such that magicc forcing meets the target";
 ***   ("forcing_SSP1") settings consistent with SSP 1
 ***   ("forcing_SSP2") settings consistent with SSP 2
