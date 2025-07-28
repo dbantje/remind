@@ -1163,10 +1163,7 @@ parameter
 ;
   cm_tempConvergence       = 0.05;  !! def = 0.05
 ;
-parameter
-  c_52_LCAquantile        "quantile of the environmetal cost distributions"
-;
-  c_52_LCAquantile         = 0.5;    !! def = 0.5 !! regex 0.1|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9
+
 parameter
   cm_carbonprice_temperatureLimit "not-to-exceed temperature target in degree above pre-industrial [45_carbonprice = temperatureNotToExceed]"
 ;
@@ -1177,7 +1174,6 @@ parameter
 ;
   cm_frac_CCS          = 10;   !! def = 10
 *'
-
 parameter
   cm_frac_NetNegEmi    "tax on net negative emissions to reflect risk of overshooting, formulated as fraction of carbon price"
 ;
@@ -1316,6 +1312,20 @@ parameter
 *' This switch changes the assumption about the share of timely realised capacities from sum of announced/planned in 2030 from the IEA CCS data base
 *' Default assumption is that only 30% of announced or planned capacities will be realised, either due to discontinuation or delay
 
+parameter
+  cm_startIter_EDGET          "starting iteration of EDGE-T"
+;
+  cm_startIter_EDGET = 10;  !! def = 10, by default EDGE-T is run first in iteration 10  !! regexp = [0-9]+
+*' EDGE-T transport starting iteration of coupling
+*' def 10, EDGE-T coupling starts at 10, if you want to test whether infeasibilities after EDGE-T -> set it to 1 to check after first iteration
+*'
+parameter
+  cm_startIter_LCA          "starting iteration of LCA coupling"
+;
+  cm_startIter_LCA = 15;  !! def = 15  !! regexp = [0-9]+
+*' starting iteration of coupling the LCA workflow in module 52
+*' default is 15. As EDGE-T results are needed for the workflow, also cm_startIter_EDGET is also checked.
+*'
 parameter
   cm_deuCDRmax                 "switch to limit maximum annual CDR amount in Germany in MtCO2 per y"
 ;
@@ -2197,6 +2207,18 @@ $setGlobal cm_chaCoalBounds off    !! def = off
 *' *  (off): no, only infeasable regions are repeated, standard setting
 *' *  (on):  also non-optimal regions are solved again, up to cm_solver_try_max
 $setglobal cm_repeatNonOpt off      !! def = off  !! regexp = off|on
+*' c_52_coupling mode     "mode for LCA coupling"
+*' (iterative): LCA workflow run iteratively after some REMIND iterations
+*' (static): load static costs
+*' (testing): test environments, no LCA costs calculated
+$setglobal c_52_coupling_mode iterative       !! def = iterative  !! regexp = iterative|static|testing
+*' c_52_monetization_type     "type of monetization, determines how c_52_LCA_monetizationFactor is interpreted"
+*' (quantile): interpreted as quantile of MC sampled cost distributions
+*' (perspective): interpreted as monetization perspective
+*' (monetization_factors): interpreted as path to file with monetization factors
+$setglobal c_52_monetization_type quantile    !! def = quantile  !! regexp = quantile|perspective|monetization_factors
+*' c_52_LCA_monetizationFactor    "quantile, cost perspective, or path of monetization factors"
+$setglobal c_52_LCA_monetizationFactor 0.5 !! def = 0.5
 *** Switch to use only a single midpoint for environmental cost internalization
 $setglobal cm_52_single_midpoint none !! def = none
 *** Switch to exclude a list of midpoints from environmental cost internalization
