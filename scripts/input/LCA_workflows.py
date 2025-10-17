@@ -26,8 +26,6 @@ IMPACT_CATEGORIES_MC = [
     "photochemical oxidant formation",
     "water use"
 ]
-RAMP_UP_START = 2020
-RAMP_UP_END = 2030
 
 def get_monetization_arg(args):
     if args.quantile is not None:
@@ -111,6 +109,8 @@ if __name__ == "__main__":
     parser.add_argument('mifpath', type=str, help="Path to the .mif file")
     parser.add_argument('gdxpath', type=str, help="Path to the .gdx file")
     parser.add_argument('pathway', type=str, help="Name of the REMIND scenario")
+    parser.add_argument('rampStart', type=int, help="Start year of linear cost ramp up")
+    parser.add_argument('rampEnd', type=int, help="End year of linear cost ramp up")
     routines = parser.add_argument_group(title="Routines", description="Flags determining which routines to run.")
     routines.add_argument('--plca', action='store_true', help="Run pLCA updates with premise")
     routines.add_argument('--calcCosts', action='store_true', help="Run the cost calculation")
@@ -179,8 +179,8 @@ if __name__ == "__main__":
 
         ics = get_impact_categories(args)
         I.write_remind_input_files(
-            RAMP_UP_START,
-            RAMP_UP_END,
+            args.rampStart,
+            args.rampEnd,
             ics
         )
         t1 = time.time()
