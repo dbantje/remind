@@ -119,6 +119,8 @@ runLCAWorkflowCmd <- paste(
   mifPath,
   gdxPath,
   pathway,
+  cfg$gms$c52_rampStart_LCA,
+  cfg$gms$c52_rampEnd_LCA,
   "--mode", cfg$gms$c_52_coupling_mode,
   paste0("--", cfg$gms$c_52_monetization_type), cfg$gms$c_52_LCA_monetizationFactor,
   "--single_midpoint", paste0("'", cfg$gms$cm_52_single_midpoint, "'"),

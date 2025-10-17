@@ -1213,6 +1213,14 @@ parameter
 ;
   cm_freqIter_LCA = 5;    !! def = 5   !! regexp = ^[1-9]\d*$
 parameter
+  c52_rampStart_LCA    "Start year of linear ramp of LCA-based environmental costs"
+;
+  c52_rampStart_LCA = 2020;     !! def = 2020   !! regexp = 20[0-9](0|5)
+parameter
+  c52_rampEnd_LCA    "End year of linear ramp of LCA-based environmental costs"
+;
+  c52_rampEnd_LCA = 2030;     !! def = 2030   !! regexp = 20[0-9](0|5)
+parameter
   cm_deuCDRmax                 "switch to limit maximum annual CDR amount in Germany in MtCO2 per y"
 ;
   cm_deuCDRmax = -1; !! def = -1
