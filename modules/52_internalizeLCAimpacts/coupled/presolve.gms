@@ -1,4 +1,4 @@
-*** SOF ./modules/52_internalizeLCAimpacts/coupled/postsolve.gms
+*** SOF ./modules/52_internalizeLCAimpacts/coupled/presolve.gms
 
 ***---------------------------------------------------------------------------
 *' TODO: adapt for LCA workflow
@@ -12,12 +12,12 @@
 
 *** 
 
-if( (ord(iteration) ge max(cm_startIter_EDGET, cm_startIter_LCA)),
-  Execute_unload 'fulldata_postsolve';
+if( (ord(iteration) ge max(cm_startIter_EDGET+1, cm_startIter_LCA)),
+  Execute_unload 'fulldata_presolve';
   if ((mod(ord(iteration), cm_freqIter_LCA) eq 0),
-    Execute "Rscript run_LCA_workflows.R fulldata_postsolve.gdx update_plca";
+    Execute "Rscript run_LCA_workflows.R fulldata_presolve.gdx update_plca";
   else
-    Execute "Rscript run_LCA_workflows.R fulldata_postsolve.gdx recalculate_taxes";
+    Execute "Rscript run_LCA_workflows.R fulldata_presolve.gdx recalculate_taxes";
   );
 );
 
@@ -29,4 +29,4 @@ Execute_Loadpoint 'LCA_FE'  p52_LCAcosts_FE=pm_LCAcosts_FE;
 pm_taxEI_SE(ttot,all_regi,all_te) = p52_LCAcosts_SE(ttot,all_regi,all_te) * sm_DpGJ_2_TDpTWa;
 pm_taxEI_FE(ttot,all_regi,emi_sectors,all_enty) = p52_LCAcosts_FE(ttot,all_regi,emi_sectors,all_enty) * sm_DpGJ_2_TDpTWa;
 
-*** EOF ./modules/52_internalizeLCAimpacts/coupled/postsolve.gms
+*** EOF ./modules/52_internalizeLCAimpacts/coupled/presolve.gms
