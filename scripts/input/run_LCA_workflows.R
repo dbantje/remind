@@ -15,6 +15,7 @@ library(remind2)
 library(lucode2)
 library(data.table)
 library(gdxdt)
+library(gamstransfer)
 
 igdx(system("dirname $( which gams )", intern = TRUE))
 
@@ -171,6 +172,15 @@ logMsg <- paste0(
 capture.output(cat(logMsg), file = logFile, append = TRUE)
 
 system(paste(condaCmd, runLCAWorkflowCmd, "&>>", errFile))
+
+
+# save intermediate cost files
+if (cfg$gms$c_52_keep_iteration_costs == 1 & args[2] != "preloop") {
+  df <- readGDX("fulldata_presolve.gdx", symbols=c("pm_taxCO2eq_iter"))$pm_taxCO2eq_iter$records
+  iter <- max(as.numeric(levels(df$iteration)))
+  file.copy(from="lca/lca_costs_SE.csv", to=paste0("lca/lca_costs_SE_", iter, ".csv"))
+  file.copy(from="lca/lca_costs_FE.csv", to=paste0("lca/lca_costs_FE_", iter, ".csv"))
+}
 
 # 
 # WRITE GDXes

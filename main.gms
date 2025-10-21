@@ -1209,17 +1209,25 @@ parameter
 *' default is 15. As EDGE-T results are needed for the workflow, also cm_startIter_EDGET is also checked.
 *'
 parameter
+  c_52_keep_iteration_costs    "save intermediate LCA costs"
+;
+  c_52_keep_iteration_costs = 0;    !! def = 0 !! regexp = 0|1
+*' in default we do not save LCA-based costs for each iteration. Switch on for observing convergence
+*'
+*' * (0)  Cost files from each iteration are NOT saved
+*' * (1)  Cost files from each iteration are saved
+parameter
   cm_freqIter_LCA           "Frequency of LCA updates"
 ;
   cm_freqIter_LCA = 5;    !! def = 5   !! regexp = ^[1-9]\d*$
 parameter
   c52_rampStart_LCA    "Start year of linear ramp of LCA-based environmental costs"
 ;
-  c52_rampStart_LCA = 2020;     !! def = 2020   !! regexp = 20[0-9](0|5)
+  c52_rampStart_LCA = 2025;     !! def = 2025   !! regexp = 20[0-9](0|5)
 parameter
   c52_rampEnd_LCA    "End year of linear ramp of LCA-based environmental costs"
 ;
-  c52_rampEnd_LCA = 2030;     !! def = 2030   !! regexp = 20[0-9](0|5)
+  c52_rampEnd_LCA = 2035;     !! def = 2035   !! regexp = 20[0-9](0|5)
 parameter
   cm_deuCDRmax                 "switch to limit maximum annual CDR amount in Germany in MtCO2 per y"
 ;
