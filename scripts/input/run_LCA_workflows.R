@@ -31,7 +31,14 @@ args <- commandArgs(trailingOnly = TRUE)
 outputDir <- getwd()
 gdxPath <- file.path(outputDir, args[1])
 scenario <- lucode2::getScenNames(outputDir)
-mifName <- paste0("REMIND_generic_", scenario, ".mif")
+
+# get iteration number and append to scenario name
+# iter <- 0
+# if (args[2] != "preloop") {
+#   df <- readGDX("fulldata_presolve.gdx", symbols=c("pm_taxCO2eq_iter"))$pm_taxCO2eq_iter$records
+#   iter <- max(as.numeric(levels(df$iteration)))
+# }
+# pathway <- paste0(scenario, "-iter", iter)
 
 load("config.Rdata")
 
@@ -103,7 +110,7 @@ if (args[2] == "preloop") {
 
   oldName <- paste0("REMIND_generic_", scenario, ".mif")
   
-  file.copy(from=oldName, to=mifPath)
+  file.copy(from=oldName, to=mifPath, overwrite=TRUE)
 
   logMsg <- paste0(args[2]," mode: Reporting ", newName, " done in ", dt, "\n", "\n")
   capture.output(cat(logMsg), file = logFile, append = TRUE)
@@ -123,7 +130,7 @@ if (args[2] == "preloop") {
 
   oldName <- paste0("REMIND_generic_", scenario, ".mif")
   
-  file.copy(from=oldName, to=mifPath)
+  file.copy(from=oldName, to=mifPath, overwrite=TRUE)
 
   logMsg <- paste0(args[2]," mode: Reporting ", newName, " done in ", dt, "\n", "\n")
   capture.output(cat(logMsg), file = logFile, append = TRUE)
@@ -175,9 +182,12 @@ system(paste(condaCmd, runLCAWorkflowCmd, "&>>", errFile))
 
 
 # save intermediate cost files
-if (cfg$gms$c_52_keep_iteration_costs == 1 & args[2] != "preloop") {
-  df <- readGDX("fulldata_presolve.gdx", symbols=c("pm_taxCO2eq_iter"))$pm_taxCO2eq_iter$records
-  iter <- max(as.numeric(levels(df$iteration)))
+if (cfg$gms$c_52_keep_iteration_costs == 1) {
+  iter <- 0
+  if (args[2] != "preloop") {
+    df <- readGDX("fulldata_presolve.gdx", symbols=c("pm_taxCO2eq_iter"))$pm_taxCO2eq_iter$records
+    iter <- max(as.numeric(levels(df$iteration)))
+  }
   file.copy(from="lca/lca_costs_SE.csv", to=paste0("lca/lca_costs_SE_", iter, ".csv"))
   file.copy(from="lca/lca_costs_FE.csv", to=paste0("lca/lca_costs_FE_", iter, ".csv"))
 }
