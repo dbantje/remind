@@ -1219,7 +1219,7 @@ parameter
 parameter
   cm_freqIter_LCA           "Frequency of LCA updates"
 ;
-  cm_freqIter_LCA = 5;    !! def = 5   !! regexp = ^[1-9]\d*$
+  cm_freqIter_LCA = 3;    !! def = 3   !! regexp = ^[1-9]\d*$
 parameter
   c52_rampStart_LCA    "Start year of linear ramp of LCA-based environmental costs"
 ;
