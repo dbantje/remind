@@ -143,8 +143,8 @@ message("### end generation of mif files at ", round(Sys.time()))
 
 # produce REMIND LCOE reporting *.csv based on gdx information ----
 
-message("### start generation of LCOE reporting at ", round(Sys.time()))
-remind2::convGDX2CSV_LCOE(gdx, file = LCOE_reporting_file, scen = scenario)
-message("### end generation of LCOE reporting at ", round(Sys.time()))
+# message("### start generation of LCOE reporting at ", round(Sys.time()))
+# remind2::convGDX2CSV_LCOE(gdx, file = LCOE_reporting_file, scen = scenario)
+# message("### end generation of LCOE reporting at ", round(Sys.time()))
 
 message("### reporting finished.")
