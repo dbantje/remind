@@ -95,6 +95,13 @@ p21_tau_pe2se_tax(ttot,regi,"coalftcrec")$(ttot.val ge 2005) = sm_D2005_2_D2017 
 p21_tau_pe2se_tax(ttot,regi,"coalh2")$(ttot.val ge 2005)     = sm_D2005_2_D2017 * 0.5;
 p21_tau_pe2se_tax(ttot,regi,"coalh2c")$(ttot.val ge 2005)    = sm_D2005_2_D2017 * 0.5;
 p21_tau_pe2se_tax(ttot,regi,"coalgas")$(ttot.val ge 2005)    = sm_D2005_2_D2017 * 0.5;
+
+*** Tax on first generation biomass technologies
+if ((cm_1stgen_tax ge 0),
+p21_tau_pe2se_tax(ttot,regi,"bioeths")$(ttot.val ge 2030)   = cm_1stgen_tax;
+p21_tau_pe2se_tax(ttot,regi,"biodiesel")$(ttot.val ge 2030) = cm_1stgen_tax;
+);
+
 ***cb20110923 rescaling of PE2SE parameters from $/GJ to trillion $ / TWa 
 p21_tau_pe2se_tax(ttot,regi,te)$(ttot.val ge 2005)    = p21_tau_pe2se_tax(ttot,regi,te)    * 0.001 / sm_EJ_2_TWa;
 

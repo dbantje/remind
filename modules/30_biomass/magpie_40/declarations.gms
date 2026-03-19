@@ -27,7 +27,9 @@ $IFTHEN.bioprod_regi_lim not "%cm_bioprod_regi_lim%" == "off"
 p30_bioprod_regi_lim(ext_regi)   "limit of total biomass production per region or region group [EJ/yr]" / %cm_bioprod_regi_lim% /
 $ENDIF.bioprod_regi_lim
 
-
+$ifthen.bioenergyphaseout not "%cm_regi_bioenergy_phaseout%" == "off"
+p30_regi_bioenergy_phaseout(all_regi)   "phase out years for purpose-grown lignocellulosic biomass production per region" / %cm_regi_bioenergy_phaseout% /
+$endif.bioenergyphaseout
 
 *** Shift factor calculation
 pm_pebiolc_costs_emu_preloop(ttot,all_regi)     "Bioenergy costs calculated with emulator using MAgPIE demand. For shift factor calculation [T$US]"

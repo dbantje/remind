@@ -736,6 +736,14 @@ parameter
 *' The consistency between REMIND and MAgPIE switches is checked by scripts/start/checkSettingsRemMag.R
 *'
 parameter
+  cm_1stgen_tax             "set a tax on first generation biomass technologies"
+;
+  cm_1stgen_tax = 0;        !! def = 0
+*' Only effective if 21_tax is on, applied globally for bioeths and biodiesel technologies after 2030.
+*' *  (0):  off
+*' *  (1):  Set a tax of 1 USD/GJ
+*' *  (any value ge 0): set tax to that values
+parameter
   cm_phaseoutBiolc          "Switch that allows for a full phaseout of all bioenergy technologies globally"
 ;
   cm_phaseoutBiolc    = 0;         !! def = 0  !! regexp = 0|1
@@ -1358,6 +1366,10 @@ $setglobal cm_maxProdBiolc  off  !! def = off  !! regexp = off|is.nonnegative
 *** then the values from the region group disaggregation will be overwritten by this region-specific value.
 *** For example: "EU27_regi 7.5, DEU 1.5".
 $setGLobal cm_bioprod_regi_lim off  !! def off
+*** cm_regi_bioenergy_phaseout
+*** phase out purpose-grown lignocellulosic biomass per region in a given year
+*** example: "EUR 2050" phases out lpurpose-grown lignocellulosic biomass in EUR by 2050. 
+$setGlobal cm_regi_bioenergy_phaseout off !! def off
 *' cm_GDPpopScen  "assumptions about future GDP and population development"
 *'  * (SSP1):  SSP1 fastGROWTH medCONV
 *'  * (SSP2):  SSP2 medGROWTH medCONV
