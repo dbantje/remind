@@ -61,6 +61,8 @@ qttyTargetGroup "quantity target aggregated categories"
 /
   all
   biomass
+  biomass_lc
+  biomass_1stgen
   fossil
   VRE
   wind
@@ -78,6 +80,8 @@ energyQttyTargetANDGroup2enty(qttyTarget,qttyTargetGroup,all_enty) "set combinin
 *** Primary energy type categories
 ***  PE.all.(entyPe) !! defined below as calculated set
   PE.biomass.(pebiolc,pebios,pebioil)
+  PE.biomass_lc.pebiolc
+  PE.biomass_1stgen.(pebios,pebioil)
   PE.fossil.(peoil,pegas,pecoal)
   PE.VRE.(pewin,pesol)
   PE.wind.pewin

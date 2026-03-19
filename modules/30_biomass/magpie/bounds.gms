@@ -155,6 +155,19 @@ display p30_max_pebiolc_path;
 vm_fuExtr.up(t,regi,"pebiolc","1") = p30_max_pebiolc_path(regi,t) + pm_pedem_res(t,regi,"biotr");
 $endif.bioenergymaxscen
 
+$ifthen.bioenergyphaseout not "%cm_regi_bioenergy_phaseout%" == "off"
+loop(regi$(p30_regi_bioenergy_phaseout(regi)),
+    loop(t$(t.val ge cm_startyear),
+        if (t.val le p30_regi_bioenergy_phaseout(regi),
+            vm_fuExtr.up(t,regi,"pebiolc","1") = 0.001 + pm_pedem_res(t,regi,"biotr")
+                                                - (pm_pebiolc_demandmag("2025",regi) / (p30_regi_bioenergy_phaseout(regi) - cm_startyear + 5)) * (t.val - p30_regi_bioenergy_phaseout(regi))
+        else
+            vm_fuExtr.up(t,regi,"pebiolc","1") = 0.001 + pm_pedem_res(t,regi,"biotr");
+        );
+    );
+);
+$endif.bioenergyphaseout
+
 
 *** -------------------------------------------------------------
 *' #### Phase out capacities of bioenergy technologies that use
