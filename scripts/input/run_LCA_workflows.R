@@ -167,6 +167,7 @@ runLCAWorkflowCmd <- paste(
   scenario,
   cfg$gms$c52_rampStart_LCA,
   cfg$gms$c52_rampEnd_LCA,
+  cfg$gms$cm_52_internalize_levels,
   routines,
   paste0("--", cfg$gms$c_52_monetization_type), cfg$gms$c_52_LCA_monetizationFactor,
   "--single_midpoint", paste0("'", cfg$gms$cm_52_single_midpoint, "'"),
@@ -188,30 +189,38 @@ if (cfg$gms$c_52_keep_iteration_costs == 1) {
     df <- readGDX("fulldata_presolve.gdx", symbols=c("pm_taxCO2eq_iter"))$pm_taxCO2eq_iter$records
     iter <- max(as.numeric(levels(df$iteration)))
   }
-  file.copy(from="lca/lca_costs_SE.csv", to=paste0("lca/lca_costs_SE_", iter, ".csv"))
-  file.copy(from="lca/lca_costs_FE.csv", to=paste0("lca/lca_costs_FE_", iter, ".csv"))
+  if grepl("FE", cfg$gms$cm_52_internalize_levels, fixed=TRUE) {
+    file.copy(from="lca/lca_costs_FE.csv", to=paste0("lca/lca_costs_FE_", iter, ".csv"))
+  }
+  if grepl("SE", cfg$gms$cm_52_internalize_levels, fixed=TRUE) {
+    file.copy(from="lca/lca_costs_SE.csv", to=paste0("lca/lca_costs_SE_", iter, ".csv"))
+  }
 }
 
 # 
 # WRITE GDXes
 #
 
-SEcosts <- as.data.table(read.csv("lca/lca_costs_SE.csv"))
-gdxdt::writegdx.parameter(
-  "LCA_SE.gdx",
-  SEcosts,
-  name = "pm_LCAcosts_SE",
-  valcol = "cost",
-  uelcols = c('ttot', 'all_regi', 'all_te')
-)
+if grepl("SE", cfg$gms$cm_52_internalize_levels, fixed=TRUE) {
+  SEcosts <- as.data.table(read.csv("lca/lca_costs_SE.csv"))
+  gdxdt::writegdx.parameter(
+    "LCA_SE.gdx",
+    SEcosts,
+    name = "pm_LCAcosts_SE",
+    valcol = "cost",
+    uelcols = c('ttot', 'all_regi', 'all_te')
+  )
+}
 
-FEcosts <- as.data.table(read.csv("lca/lca_costs_FE.csv"))
-gdxdt::writegdx.parameter(
-  "LCA_FE.gdx",
-  FEcosts,
-  name = "pm_LCAcosts_FE",
-  valcol = "cost",
-  uelcols = c('ttot', 'all_regi', 'emi_sectors', 'all_enty')
-)
+if grepl("FE", cfg$gms$cm_52_internalize_levels, fixed=TRUE) {
+  FEcosts <- as.data.table(read.csv("lca/lca_costs_FE.csv"))
+  gdxdt::writegdx.parameter(
+    "LCA_FE.gdx",
+    FEcosts,
+    name = "pm_LCAcosts_FE",
+    valcol = "cost",
+    uelcols = c('ttot', 'all_regi', 'emi_sectors', 'all_enty')
+  )
+}
 
 print("...done")

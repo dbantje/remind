@@ -22,8 +22,12 @@ if( (ord(iteration) ge max(cm_startIter_EDGET+1, cm_startIter_LCA)),
 );
 
 !! Read in results
-Execute_Loadpoint 'LCA_SE'  p52_LCAcosts_SE=pm_LCAcosts_SE;
-Execute_Loadpoint 'LCA_FE'  p52_LCAcosts_FE=pm_LCAcosts_FE;
+if (cm_52_internalize_levels eq "SE" or cm_52_internalize_levels eq "SE,FE",
+  Execute_Loadpoint 'LCA_SE'  p52_LCAcosts_SE=pm_LCAcosts_SE;
+);
+if (cm_52_internalize_levels eq "FE" or cm_52_internalize_levels eq "SE,FE",
+  Execute_Loadpoint 'LCA_FE'  p52_LCAcosts_FE=pm_LCAcosts_FE;
+);
 
 !! convert units
 pm_taxEI_SE(ttot,all_regi,all_te) = p52_LCAcosts_SE(ttot,all_regi,all_te) * sm_DpGJ_2_TDpTWa;

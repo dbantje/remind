@@ -111,6 +111,7 @@ if __name__ == "__main__":
     parser.add_argument('pathway', type=str, help="Name of the REMIND scenario")
     parser.add_argument('rampStart', type=int, help="Start year of linear cost ramp up")
     parser.add_argument('rampEnd', type=int, help="End year of linear cost ramp up")
+    parser.add_argument('levels', type=str, help="Levels to internalize (SE, FE or SE,FE)")
     routines = parser.add_argument_group(title="Routines", description="Flags determining which routines to run.")
     routines.add_argument('--plca', action='store_true', help="Run pLCA updates with premise")
     routines.add_argument('--calcCosts', action='store_true', help="Run the cost calculation")
@@ -158,7 +159,7 @@ if __name__ == "__main__":
     else:
         I.years = YEARS_INTERNALIZATION
 
-    I.set_calculation_setup() # defaults to REMIND Internalization setup
+    I.set_calculation_setup(levels=args.levels) # defaults to REMIND Internalization setup
 
     if args.calcCosts:
         t0 = time.time()
