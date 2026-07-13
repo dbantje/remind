@@ -44,7 +44,7 @@ def get_monetization_arg(args):
 def get_impact_categories(args):
     # get selected impact categories
     if args.monetization_factors is not None:
-        all_ics = list(monetization.keys())
+        all_ics = list(args.monetization_factors.keys())
     else:
         all_ics = IMPACT_CATEGORIES_MC
     ics = []
@@ -121,8 +121,10 @@ if __name__ == "__main__":
     monetization_group.add_argument('--quantile', type=float, help="quantile for MC monetization")
     monetization_group.add_argument('--perspective', type=str, help="monetization perspective")
     monetization_group.add_argument('--monetization_factors', type=str, help="File with explicit monetization factors")
-    parser.add_argument('--single_midpoint', type=str, help="Run for a single midpoint")
-    parser.add_argument('--exclude_midpoints', type=str, help="Run with some midpoints excluded")
+    parser.add_argument('--single_midpoint', type=str, help="Run for a single midpoint", default="none")
+    parser.add_argument('--exclude_midpoints', type=str, help="Run with some midpoints excluded", default="none")
+    parser.add_argument('--foldername', type=str, help="Name of the folder to store the results", default="lca")
+    parser.add_argument('--multiple_runs', action='store_true', help="Whether several runs are assessed in the same folder")
 
     args = parser.parse_args()
 
@@ -146,7 +148,8 @@ if __name__ == "__main__":
         EI_VERSION,
         bw_project,
         args.gdxpath,
-        outputfolder = "lca"
+        outputfolder = args.foldername,
+        single_run = not args.multiple_runs,
     )
 
     if args.plca:
