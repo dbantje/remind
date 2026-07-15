@@ -8,6 +8,7 @@ import xarray as xr
 
 from internalizer import Internalizer
 from internalizer.internalizer import CONFIG_NO_REMOVAL
+from internalizer.utils import get_automatic_exclude_list
 
 EI_VERSION = "3.10"
 YEARS_INTERNALIZATION = [2020, 2030, 2040, 2050, 2060, 2070]
@@ -54,7 +55,12 @@ def get_impact_categories(args):
     else:
         exclude_list = []
         if args.exclude_midpoints != "none":
-            exclude_list = list(args.exclude_midpoints.split(","))
+            if args.exclude_midpoints == "auto":
+                print("Getting automatic exclude list based on the mapping file.")
+                exclude_list = get_automatic_exclude_list(all_ics)
+            else:
+                exclude_list = list(args.exclude_midpoints.split(","))
+        print(f"Excluding the following midpoints/methods: {exclude_list}")
         ics = [ic for ic in all_ics if ic not in exclude_list]
 
     return ics

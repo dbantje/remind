@@ -2237,7 +2237,7 @@ $setglobal c_52_LCA_monetizationFactor 0.5 !! def = 0.5
 *** Switch to use only a single midpoint for environmental cost internalization
 $setglobal cm_52_single_midpoint none !! def = none
 *** Switch to exclude a list of midpoints from environmental cost internalization
-$setglobal cm_52_exclude_midpoints none !! def = none
+$setglobal cm_52_exclude_midpoints auto !! def = auto
 *** Selecting the levels for which to internalize environmental costs.
 $setglobal cm_52_internalize_levels "SE,FE" !! def = "SE,FE"
 
