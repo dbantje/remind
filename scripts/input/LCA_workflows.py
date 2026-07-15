@@ -44,7 +44,8 @@ def get_monetization_arg(args):
 def get_impact_categories(args):
     # get selected impact categories
     if args.monetization_factors is not None:
-        all_ics = list(args.monetization_factors.keys())
+        monetization = get_monetization_arg(args)
+        all_ics = list(monetization.keys())
     else:
         all_ics = IMPACT_CATEGORIES_MC
     ics = []
