@@ -189,10 +189,10 @@ if (cfg$gms$c_52_keep_iteration_costs == 1) {
     df <- readGDX("fulldata_presolve.gdx", symbols=c("pm_taxCO2eq_iter"))$pm_taxCO2eq_iter$records
     iter <- max(as.numeric(levels(df$iteration)))
   }
-  if grepl("FE", cfg$gms$cm_52_internalize_levels, fixed=TRUE) {
+  if (grepl("FE", cfg$gms$cm_52_internalize_levels, fixed=TRUE)) {
     file.copy(from="lca/lca_costs_FE.csv", to=paste0("lca/lca_costs_FE_", iter, ".csv"))
   }
-  if grepl("SE", cfg$gms$cm_52_internalize_levels, fixed=TRUE) {
+  if (grepl("SE", cfg$gms$cm_52_internalize_levels, fixed=TRUE)) {
     file.copy(from="lca/lca_costs_SE.csv", to=paste0("lca/lca_costs_SE_", iter, ".csv"))
   }
 }
@@ -201,7 +201,7 @@ if (cfg$gms$c_52_keep_iteration_costs == 1) {
 # WRITE GDXes
 #
 
-if grepl("SE", cfg$gms$cm_52_internalize_levels, fixed=TRUE) {
+if (grepl("SE", cfg$gms$cm_52_internalize_levels, fixed=TRUE)) {
   SEcosts <- as.data.table(read.csv("lca/lca_costs_SE.csv"))
   gdxdt::writegdx.parameter(
     "LCA_SE.gdx",
@@ -212,7 +212,7 @@ if grepl("SE", cfg$gms$cm_52_internalize_levels, fixed=TRUE) {
   )
 }
 
-if grepl("FE", cfg$gms$cm_52_internalize_levels, fixed=TRUE) {
+if (grepl("FE", cfg$gms$cm_52_internalize_levels, fixed=TRUE)) {
   FEcosts <- as.data.table(read.csv("lca/lca_costs_FE.csv"))
   gdxdt::writegdx.parameter(
     "LCA_FE.gdx",
