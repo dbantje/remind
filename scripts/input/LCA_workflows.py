@@ -10,7 +10,7 @@ from internalizer import Internalizer
 from internalizer.internalizer import CONFIG_NO_REMOVAL
 from internalizer.utils import get_automatic_exclude_list
 
-EI_VERSION = "3.10"
+EI_VERSION = "3.10.1"
 YEARS_INTERNALIZATION = [2020, 2030, 2040, 2050, 2060, 2070]
 IMPACT_CATEGORIES_MC = [
     "acidification",
@@ -132,6 +132,8 @@ if __name__ == "__main__":
     parser.add_argument('--exclude_midpoints', type=str, help="Run with some midpoints excluded", default="none")
     parser.add_argument('--foldername', type=str, help="Name of the folder to store the results", default="lca")
     parser.add_argument('--multiple_runs', action='store_true', help="Whether several runs are assessed in the same folder")
+    parser.add_argument('--no-compartments-change', action='store_true', help="Do not change PM emission compartments.")
+    parser.add_argument('--no-interventions', action='store_true', help="Do not include interventions.")
 
     args = parser.parse_args()
 
@@ -147,7 +149,7 @@ if __name__ == "__main__":
         
 
     # in any case, initialize an Internalizer instance and call the setup
-    bw_project = f"internalizer_ei_{EI_VERSION}"
+    bw_project = f"scenarioLCA_{EI_VERSION}"
     I = Internalizer(
         args.mifpath,
         "remind",
@@ -162,7 +164,7 @@ if __name__ == "__main__":
     if args.plca:
         t0 = time.time()
         add_ES_subcategories(args.mifpath)
-        I.run_premise(YEARS_INTERNALIZATION)
+        I.run_premise(YEARS_INTERNALIZATION, include_interventions=not args.no_interventions)
         t1 = time.time()
         logFile.writelines([f"Premise runs done in {t1-t0} seconds", "\n"])
 
@@ -174,7 +176,8 @@ if __name__ == "__main__":
     if args.calcCosts:
         t0 = time.time()
         monetization = get_monetization_arg(args)
-        I.calculate_costs(monetization, save_intermediate_results=True)
+        I.calculate_costs(monetization, save_intermediate_results=True,
+                          change_pm_compartments=not args.no_compartments_change)
         t1 = time.time()
         logFile.writelines([f"Cost calculation done in {t1-t0} seconds", "\n"])
 
