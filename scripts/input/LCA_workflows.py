@@ -94,6 +94,8 @@ if __name__ == "__main__":
     parser.add_argument('--multiple_runs', action='store_true', help="Whether several runs are assessed in the same folder")
     parser.add_argument('--no-compartments-change', action='store_true', help="Do not change PM emission compartments.")
     parser.add_argument('--no-interventions', action='store_true', help="Do not include interventions.")
+    parser.add_argument('--skip-processing', action='store_true',
+                        help="Whether to skip the processing of the .mif files (if already done.)")
 
     args = parser.parse_args()
 
@@ -108,7 +110,8 @@ if __name__ == "__main__":
     logFile.writelines(["\n"])
 
     # append to reporting
-    process_mif(args.mifpath, model="remind")   
+    if not args.skip_processing:
+        process_mif(args.mifpath, model="remind")
 
     # in any case, initialize an Internalizer instance and call the setup
     bw_project = f"scenarioLCA_{EI_VERSION}"
@@ -125,7 +128,11 @@ if __name__ == "__main__":
 
     if args.plca:
         t0 = time.time()
-        I.run_premise(YEARS_INTERNALIZATION, include_interventions=not args.no_interventions)
+        I.run_premise(
+            YEARS_INTERNALIZATION,
+            include_interventions=not args.no_interventions,
+            change_pm_compartments=not args.no_compartments_change
+        )
         t1 = time.time()
         logFile.writelines([f"Premise runs done in {t1-t0} seconds", "\n"])
 
@@ -137,8 +144,7 @@ if __name__ == "__main__":
     if args.calcCosts:
         t0 = time.time()
         monetization = get_monetization_arg(args)
-        I.calculate_costs(monetization, save_intermediate_results=True,
-                          change_pm_compartments=not args.no_compartments_change)
+        I.calculate_costs(monetization, save_intermediate_results=True)
         t1 = time.time()
         logFile.writelines([f"Cost calculation done in {t1-t0} seconds", "\n"])
 
