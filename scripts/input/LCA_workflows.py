@@ -12,7 +12,7 @@ from internalizer.utils import get_automatic_exclude_list
 from internalizer.mif_processing import process_mif
 
 EI_VERSION = "3.10.1"
-YEARS_INTERNALIZATION = [2020, 2030, 2040, 2050, 2060, 2070]
+YEARS_INTERNALIZATION = [2020, 2030, 2040, 2050, 2060, 2070, 2080, 2100]
 IMPACT_CATEGORIES_MC = [
     "acidification",
     "climate change",
