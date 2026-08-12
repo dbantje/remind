@@ -96,6 +96,8 @@ if __name__ == "__main__":
     parser.add_argument('--no-interventions', action='store_true', help="Do not include interventions.")
     parser.add_argument('--skip-processing', action='store_true',
                         help="Whether to skip the processing of the .mif files (if already done.)")
+    parser.add_argument('--skip-removal', action='store_true',
+                        help="Whether to skip the removal of other levels and masked datasets, for double-counting diagnostics.")
 
     args = parser.parse_args()
 
@@ -144,7 +146,7 @@ if __name__ == "__main__":
     if args.calcCosts:
         t0 = time.time()
         monetization = get_monetization_arg(args)
-        I.calculate_costs(monetization, save_intermediate_results=True)
+        I.calculate_costs(monetization, save_intermediate_results=True, use_removal_lists=not args.skip_removal)
         t1 = time.time()
         logFile.writelines([f"Cost calculation done in {t1-t0} seconds", "\n"])
 
