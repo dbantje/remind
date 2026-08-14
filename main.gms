@@ -1670,6 +1670,10 @@ $setglobal cm_storageFactor  off !! def = off
 ***   def <- "off" = no change for learn rate value;
 ***   or list of techs to change learn rate value. (ex. "spv 0.2")
 $setglobal cm_learnRate  off !! def = off
+*** cm_techLifetime "change technology lifetime value by technology."
+***   def <- "off" = no change for technology lifetime value;
+***   or list of techs to change lifetime value. (ex. "spv 25")
+$setglobal cm_techLifetime off !! def = off
 *** cm_adj_seed and cm_adj_seed_cont "overwrite the technology-dependent adjustment cost seed value. Smaller means slower scale-up."
 ***   both swicthes have the same functionality, but allow more changes once the character limit of cm_adj_seed is reached.
 ***   def <- "off" = use default adj seed values.

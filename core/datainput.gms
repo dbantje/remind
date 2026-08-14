@@ -271,7 +271,8 @@ $if not "%cm_learnRate%" == "off"       parameter p_new_learnRate(all_te) / %cm_
 $if not "%cm_learnRate%" == "off"                 fm_dataglob("learn",te)$p_new_learnRate(te) = p_new_learnRate(te);
 $if not "%cm_inco0RegiFactor%" == "off" parameter p_new_inco0RegiFactor(all_te) / %cm_inco0RegiFactor% /;
 $if not "%cm_inco0RegiFactor%" == "off"           p_inco0(ttot,regi,te)$(p_inco0(ttot,regi,te) and p_new_inco0RegiFactor(te)) = p_new_inco0RegiFactor(te) * p_inco0(ttot,regi,te);
-
+$if not "%cm_techLifetime%" == "off" parameter p_new_techLifetime(all_te) / %cm_techLifetime% /;
+$if not "%cm_techLifetime%" == "off"             fm_dataglob("lifetime",te)$p_new_techLifetime(te) = p_new_techLifetime(te);
 
 ***---------------------------------------------------------------------------
 *** Unit uniformisation
